@@ -36,7 +36,7 @@ wbcd_test_labels <- wbcd[470:569, 1]
 #Carregando lib do svm
 library(kernlab)
 #Aplicando SVM
-wbcd_test_pred <- ksvm(diagnosis ~ ., data = wbcd_train, kernel = "vanilladot")
+wbcd_test_pred <- ksvm(diagnosis ~ ., data = wbcd, kernel = "vanilladot")
 wbcd_test_pred
 #Predições
 wbcd_predictions <- predict(wbcd_test_pred, wbcd_test)
