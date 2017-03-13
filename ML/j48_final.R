@@ -1,6 +1,6 @@
 j48Function <- function(workSpace){
   
-  #setwd("/home/danilo/R/workspace/R-programming/ML/")
+  #workSpace <- setwd("/home/danilo/R/workspace/R-programming/ML/")
   
   setwd(workSpace)
   
@@ -27,12 +27,13 @@ j48Function <- function(workSpace){
   #summary(wbcd_n$area_mean)
   
   #Dividindo a base em treinamento e teste
-  #wbcd_train <- wbcd_n[1:469, ]
-  #wbcd_test <- wbcd_n[470:569, ]
+  wbcd_n <- wbcd
+  wbcd_train <- wbcd_n[1:469, ]
+  wbcd_test <- wbcd_n[470:569, ]
   
   #Valores do diagnosis, é o que queremos predizer, são os fatores
-  #wbcd_train_labels <- wbcd[1:469, 1]
-  #wbcd_test_labels <- wbcd[470:569, 1]
+  wbcd_train_labels <- wbcd[1:469, 1]
+  wbcd_test_labels <- wbcd[470:569, 1]
   
   #sudo R CMD javareconf
   java_h <- Sys.getenv("JAVA_HOME")
@@ -41,7 +42,7 @@ j48Function <- function(workSpace){
   library(RWeka)
   
   #Aplicando o treimanto na arvore, criando o modelo preditivo
-  wbcd_classifier <- J48(diagnosis~., data = wbcd)
+  wbcd_classifier <- J48(diagnosis~., data = wbcd_train)
   wbcd_classifier
   #summary(wbcd_classifier)
   
@@ -56,17 +57,16 @@ j48Function <- function(workSpace){
   summary(e)
   e$details
   
-  
   #•	 True Positive (TP): Correctly classified as the class of interest
   #•	 True Negative (TN): Correctly classified as not the class of interest
   #•	 False Positive (FP): Incorrectly classified as the class of interest
   #•	 False Negative (FN): Incorrectly classified as not the class of interest
   
   #Valores da CroosTable
-  trueNegative <- 356
-  falsePositive <-  1
-  falseNegative <- 4
-  truePositive <- 208
+  trueNegative <- 266
+  falsePositive <-  14
+  falseNegative <- 20
+  truePositive <- 169
 
   #Aplicando Precision
   precision_sms_results1 <- truePositive / (truePositive + falsePositive)

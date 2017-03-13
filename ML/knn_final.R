@@ -1,5 +1,7 @@
 knnFunction <- function(workSpace){
 
+  #setwd("/home/danilo/R/workspace/R-programming/ML/")
+  
 setwd(workSpace)
 
 wbcd <- read.csv("wisc_bc_data.csv", stringsAsFactors = FALSE)

@@ -1,4 +1,5 @@
 c5_0Function <- function(workSpace){
+  #workSpace <- setwd("/home/danilo/R/workspace/R-programming/ML/")
   
 setwd(workSpace)
 
@@ -12,19 +13,20 @@ table(wbcd$diagnosis)#Cria uma tabela com os valores da coluna 'diagnosis'
 #Também aproveitamos esta oportunidade para dar aos valores "B" e "M" valores mais informativos usando o parâmetro labels
 wbcd$diagnosis<- factor(wbcd$diagnosis, levels = c("B", "M"), labels = c("Benign", "Malignant"))
 #wbcd$diagnosis
-round(prop.table(table(wbcd$diagnosis)) * 100, digits = 1)#round aredonda o valor e prop.table pega as colunas da tabela e mostra a divisão em %
+#round(prop.table(table(wbcd$diagnosis)) * 100, digits = 1)#round aredonda o valor e prop.table pega as colunas da tabela e mostra a divisão em %
 
-summary(wbcd[c("radius_mean", "area_mean", "smoothness_mean")])
+#summary(wbcd[c("radius_mean", "area_mean", "smoothness_mean")])
 #Função para normalizar as features das colunas
-normalize <- function(x) {
-  return ((x - min(x)) / (max(x) - min(x)))
-}
+#normalize <- function(x) {
+#  return ((x - min(x)) / (max(x) - min(x)))
+#}
 
 #Aplicando a normalize na tabela wbcd a partir da coluna 2, criando um novo frame e salvando wm wbcd_n
-wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
+#wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
 summary(wbcd_n$area_mean)
 
 #Dividindo a base em treinamento e teste
+wbcd_n <- wbcd
 wbcd_train <- wbcd_n[1:469, ]
 wbcd_test <- wbcd_n[470:569, ]
 
@@ -54,10 +56,10 @@ CrossTable(wbcd_pred, wbcd_test_labels, prop.chisq = FALSE, prop.t = FALSE)
 #•	 False Negative (FN): Incorrectly classified as not the class of interest
 
 #Valores da CroosTable
-trueNegative <- 71
-falsePositive <-  2
-falseNegative <- 6
-truePositive <- 21
+trueNegative <- 77
+falsePositive <-  0
+falseNegative <- 0
+truePositive <- 23
 
 
 library(caret)

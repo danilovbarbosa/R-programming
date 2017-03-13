@@ -1,6 +1,6 @@
 smoFunction <- function(workSpace){
   
-  #setwd("/home/danilo/R/workspace/R-programming/ML/")
+  #workSpace<- setwd("/home/danilo/R/workspace/R-programming/ML/")
   
   setwd(workSpace)
   
@@ -27,12 +27,13 @@ smoFunction <- function(workSpace){
   #summary(wbcd_n$area_mean)
   
   #Dividindo a base em treinamento e teste
-  #wbcd_train <- wbcd_n[1:469, ]
-  #wbcd_test <- wbcd_n[470:569, ]
+  wbcd_n <- wbcd
+  wbcd_train <- wbcd_n[1:469, ]
+  wbcd_test <- wbcd_n[470:569, ]
   
   #Valores do diagnosis, é o que queremos predizer, são os fatores
-  #wbcd_train_labels <- wbcd[1:469, 1]
-  #wbcd_test_labels <- wbcd[470:569, 1]
+  wbcd_train_labels <- wbcd[1:469, 1]
+  wbcd_test_labels <- wbcd[470:569, 1]
   
   #sudo R CMD javareconf
   java_h <- Sys.getenv("JAVA_HOME")
@@ -41,16 +42,13 @@ smoFunction <- function(workSpace){
   library(RWeka)
   
   #Aplicando o treimanto na arvore, criando o modelo preditivo
-  wbcd_classifier <- SMO(diagnosis~., data = wbcd, control = Weka_control(K = list("RBFKernel", G = 2)))
+  wbcd_classifier <- SMO(diagnosis~., data = wbcd_train, control = Weka_control(K = list("RBFKernel", G = 2)))
   wbcd_classifier
   #summary(wbcd_classifier)
   
   
   ## Use 10 fold cross-validation.   #Avaliando o modelo
-  e <- evaluate_Weka_classifier(wbcd_classifier,
-                                cost = matrix(c(0,2,1,0), ncol = 2),
-                                numFolds = 10, complexity = TRUE,
-                                seed = 123, class = TRUE)
+  e <- evaluate_Weka_classifier(wbcd_classifier, cost = matrix(c(0,2,1,0), ncol = 2), numFolds = 10, complexity = TRUE, seed = 123, class = TRUE)
   
   e
   summary(e)
@@ -63,10 +61,10 @@ smoFunction <- function(workSpace){
   #•	 False Negative (FN): Incorrectly classified as not the class of interest
   
   #Valores da CroosTable
-  trueNegative <- 350
-  falsePositive <-  7
-  falseNegative <- 9
-  truePositive <- 203
+  trueNegative <- 271
+  falsePositive <-  9
+  falseNegative <- 8
+  truePositive <- 181
   
   #Aplicando Precision
   precision_sms_results1 <- truePositive / (truePositive + falsePositive)

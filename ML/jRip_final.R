@@ -1,6 +1,6 @@
 jRipFunction <- function(workSpace){
   
-  #setwd("/home/danilo/R/workspace/R-programming/ML/")
+  #workSpace <- setwd("/home/danilo/R/workspace/R-programming/ML/")
   
   setwd(workSpace)
   
@@ -27,12 +27,13 @@ jRipFunction <- function(workSpace){
   #summary(wbcd_n$area_mean)
   
   #Dividindo a base em treinamento e teste
-  #wbcd_train <- wbcd_n[1:469, ]
-  #wbcd_test <- wbcd_n[470:569, ]
+  wbcd_n <- wbcd
+  wbcd_train <- wbcd_n[1:469, ]
+  wbcd_test <- wbcd_n[470:569, ]
   
   #Valores do diagnosis, é o que queremos predizer, são os fatores
-  #wbcd_train_labels <- wbcd[1:469, 1]
-  #wbcd_test_labels <- wbcd[470:569, 1]
+  wbcd_train_labels <- wbcd[1:469, 1]
+  wbcd_test_labels <- wbcd[470:569, 1]
   
   #sudo R CMD javareconf
   java_h <- Sys.getenv("JAVA_HOME")
@@ -41,7 +42,7 @@ jRipFunction <- function(workSpace){
   library(RWeka)
   
   #Aplicando o treimanto na arvore, criando o modelo preditivo
-  wbcd_classifier <- JRip(diagnosis~., data = wbcd)
+  wbcd_classifier <- JRip(diagnosis~., data = wbcd_n)
   wbcd_classifier
   #summary(wbcd_classifier)
   
