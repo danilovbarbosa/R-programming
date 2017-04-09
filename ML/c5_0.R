@@ -1,5 +1,5 @@
 c5_0Function <- function(workSpace){
-  #workSpace <- setwd("/home/danilo/R/workspace/R-programming/ML/")
+  workSpace <- setwd("/home/danilo/R/workspace/R-programming/ML/")
   
 setwd(workSpace)
 
@@ -23,7 +23,7 @@ wbcd$diagnosis<- factor(wbcd$diagnosis, levels = c("B", "M"), labels = c("Benign
 
 #Aplicando a normalize na tabela wbcd a partir da coluna 2, criando um novo frame e salvando wm wbcd_n
 #wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
-summary(wbcd_n$area_mean)
+#summary(wbcd_n$area_mean)
 
 #Dividindo a base em treinamento e teste
 wbcd_n <- wbcd

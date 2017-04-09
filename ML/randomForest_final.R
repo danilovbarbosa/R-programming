@@ -23,7 +23,7 @@ randomForestFunction <- function(workSpace){
   
   #Aplicando a normalize na tabela wbcd a partir da coluna 2, criando um novo frame e salvando wm wbcd_n
   #wbcd_n <- as.data.frame(lapply(wbcd[2:31], normalize))
-  summary(wbcd_n$area_mean)
+  #summary(wbcd_n$area_mean)
   
   #Dividindo a base em treinamento e teste
   wbcd_n <- wbcd
