@@ -28,9 +28,11 @@ boxplot(var, var)#boxplot
 cor(matrix_wbcd, use="complete.obs", method="pearson")
 
 
-fit <- lm(radius_mean ~ smoothness_mean , data=wbcd)# Multiple Linear Regression  
-summary(fit) # show results
-plot(fit)
+fit.lm <- lm(radius_mean ~ smoothness_mean , data=wbcd)# Multiple Linear Regression  
+summary(fit.lm) # show results
+plot(fit.lm)
+
+predict(fit.lm, wbcd, interval="predict") 
 
 
 

@@ -7,3 +7,7 @@ mean(var)
 median(var)
 quantile(var)
 summary(var)
+
+table(wbcd$diagnosis, wbcd$radius_mean)
+table(wbcd$radius_mean, wbcd$diagnosis)
+
